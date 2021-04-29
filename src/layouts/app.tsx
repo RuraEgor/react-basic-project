@@ -8,17 +8,19 @@ import {
   useParams
 } from "react-router-dom";
 import Login from './components/Login';
-import Manager from './components/Manager';
+// import Manager from './components/Manager';
 import './app.css';
+import { Dispatch } from "redux"
+
 
 const App: FunctionComponent = () => {
   return (
       <Router>
         <div>
           <Switch>
-            <Route path="/manager">
-              <Manager />
-            </Route>
+            {/*<Route path="/manager">*/}
+              {/*<Manager />*/}
+            {/*</Route>*/}
             <Route path="/">
               <Login />
             </Route>
