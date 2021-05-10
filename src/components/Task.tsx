@@ -1,20 +1,21 @@
 import React, {FunctionComponent} from 'react';
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
-import { changTask } from "../../store/actionCreators";
 import { Dispatch } from 'redux';
 
-type Props = {
-	task: ITask
+interface IProps {
+	task: ITask;
+	featureId: number;
+	changTaskFun(task: ITask, id: number): void;
 }
 
-const Task: FunctionComponent<Props> = ({task}) => {
+const Task: FunctionComponent<IProps> = ({task, featureId, changTaskFun}) => {
 	
 	const [newText, setNewText] = React.useState<boolean>(false)
 	const [inpText, setInpText] = React.useState<string>(task.name)
-	
-	const dispatch: Dispatch<any> = useDispatch()
+
+	// const dispatch: Dispatch<any> = useDispatch()
 	const rewriteTask = (task: ITask) => {
-		dispatch(changTask(task))
+		changTaskFun(task, featureId)
 	}
 	
 	const newTask: ITask = Object.assign({}, task);
@@ -27,7 +28,7 @@ const Task: FunctionComponent<Props> = ({task}) => {
 		} else {
 			console.log("jjjjjjjj",  );
 		}
-		
+
 		setNewText(!newText)
 	}
 	

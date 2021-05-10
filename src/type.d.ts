@@ -11,6 +11,11 @@ enum Status {
 	process = 'process',
 }
 
+interface ILogin {
+	name: string;
+	password: string;
+}
+
 interface IFeature {
 	id: number;
 	name: string;
@@ -25,7 +30,7 @@ interface ITask {
 
 type dataState = {
 	users: IUser[],
-	features?: IFeature[],
+	features: IFeature[],
 }
 
 type FeatureAction = {
@@ -33,10 +38,20 @@ type FeatureAction = {
 	feature: IFeature
 }
 
+type UserLoginAction = {
+	type: string,
+	loginUser: ILogin
+}
+
+type TakeUserAction = {
+	type: string,
+	id: number
+}
+
 type TaskAction = {
 	type: string,
 	task: ITask,
-	// featureId: number
+	featureId: number
 }
 
 type DispatchType = (args: FeatureAction) => FeatureAction

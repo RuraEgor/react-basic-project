@@ -7,10 +7,9 @@ import {
   useRouteMatch,
   useParams
 } from "react-router-dom";
-import Login from './components/Login';
-// import Manager from './components/Manager';
+import LoginLayout from './LoginLayout';
+import TasksBoardLayout from './TasksBoardLayout';
 import './app.css';
-import { Dispatch } from "redux"
 
 
 const App: FunctionComponent = () => {
@@ -18,11 +17,11 @@ const App: FunctionComponent = () => {
       <Router>
         <div>
           <Switch>
-            {/*<Route path="/manager">*/}
-              {/*<Manager />*/}
-            {/*</Route>*/}
+            <Route path="/tasksboard">
+              <TasksBoardLayout />
+            </Route>
             <Route path="/">
-              <Login />
+              <LoginLayout />
             </Route>
           </Switch>
         </div>

@@ -1,5 +1,0 @@
-export const ADD_FEATURE = "ADD_FEATURE"
-export const COMPLETE_FEATURE = "COMPLETE_FEATURE"
-export const ADD_TASK = "ADD_TASK"
-export const CHANGE_TASK = "CHANGE_TASK"
-export const COMPLETE_TASK = "COMPLETE_TASK"
