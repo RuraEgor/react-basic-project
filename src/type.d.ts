@@ -26,6 +26,7 @@ interface IFeature {
 interface ITask {
 	id: number;
 	name: string;
+	status: string;
 }
 
 type dataState = {
@@ -35,7 +36,13 @@ type dataState = {
 
 type FeatureAction = {
 	type: string,
-	feature: IFeature
+	feature: IFeature,
+}
+
+type RenameFeatureAction = {
+	type: string,
+	featureId: number,
+	featureName: string
 }
 
 type UserLoginAction = {
@@ -43,15 +50,39 @@ type UserLoginAction = {
 	loginUser: ILogin
 }
 
-type TakeUserAction = {
+type TaskAction = {
+	type: string,
+	task: ITask,
+	taskId: number
+}
+
+type RmFeatureAction = {
 	type: string,
 	id: number
 }
 
-type TaskAction = {
+type RmTaskAction = {
+	type: string,
+	id: number
+}
+
+type AddTaskAction = {
 	type: string,
 	task: ITask,
 	featureId: number
+}
+
+type StatusFeatureAction = {
+	type: string,
+	featureId: number,
+	status: string
+}
+
+type StatusTaskAction = {
+	type: string,
+	featureId: number,
+	taskId: number,
+	status: string
 }
 
 type DispatchType = (args: FeatureAction) => FeatureAction

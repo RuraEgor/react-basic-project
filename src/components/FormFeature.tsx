@@ -1,48 +1,47 @@
-import React, { FunctionComponent } from 'react';
-import { useSelector, shallowEqual, useDispatch } from "react-redux";
+import React, { FunctionComponent, useState, useEffect, useLayoutEffect} from 'react';
 
-type TNameFeature = {
-	title: string
+interface INameFeature {
+	show: boolean;
+	managFormFeature(): void;
+	changTaskFn(id: number, name: string): void;
 }
 
-const FormFeature: React.FC<any> = ({show, addFeatureFun, showFormFeature}) => {
-	const [data, setData] = React.useState<string>('')
+const FormFeature: FunctionComponent<INameFeature> = ({
+										         show,
+										         managFormFeature,
+	                                             changTaskFn
+	}) => {
 	
-	const getValue = (e: React.FormEvent<HTMLInputElement>) => {
-		if (!e.currentTarget.value) return;
-		setData(e.currentTarget.value)
+	const [inpValue, setInpValue] = useState('');
+	
+	useEffect( () =>{ if(!show) setInpValue(''); });
+	
+	
+	function createFeature(e: React.FormEvent) {
+		e.preventDefault();
+		changTaskFn(Number(Date.now().toString()), inpValue);
+		managFormFeature();
+		setInpValue('');
 	}
 	
-	const funAddFeature = (e: React.FormEvent) => {
-		e.preventDefault()
-		let elFeature: any = {
-			id: Number((Math.random() * 1000).toFixed()),
-			status: 'create',
-			tasks: []
-		}
-		elFeature.name = data;
-		addFeatureFun(elFeature);
-		showFormFeatureFun();
-	}
-	
-	const showFormFeatureFun = () => {
-		setData('');
-		showFormFeature();
+	function takeNameFeature(e: React.FormEvent<HTMLInputElement>) {
+		e.preventDefault();
+		setInpValue(e.currentTarget.value);
 	}
 	
 	return (
 		<div className={`form-wrap ${(show) ? 'form-wrap_show' : ''}`}>
-			<div onClick={showFormFeatureFun} className="form-background"></div>
-			<form onSubmit={funAddFeature} className="form-login form-login__feature">
+			<div className="form-background" onClick={managFormFeature}></div>
+			<form onSubmit={createFeature} className="form-login form-login__feature">
 				<div className="inp-wrap">
-					<p className="inp-label">Title:</p>
+					<p className="inp-label">Feature name:</p>
 					<input
 						id="feature_title"
 						className="inp-login"
 						type="text"
 						placeholder="Title feature"
-						value = {data}
-						onChange={getValue}
+						value={inpValue}
+						onChange={takeNameFeature}
 					/>
 				</div>
 				<button className="btn btn-login">Send</button>

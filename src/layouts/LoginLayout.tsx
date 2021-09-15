@@ -38,14 +38,6 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
 }
 
 export default connect(
-	// (state: any) => ({
-	// 	users: getUsersSel(state),
-	// }),
-	// dispatch => ({
-	// 	checkUserFun(loginUser: ILogin) {
-	// 		dispatch(checkUser(loginUser))
-	// 	}
-	// }),
 	mapStatetoProps,
 	mapDispatchToProps
 )(LoginLayout)

@@ -3,12 +3,22 @@ import { useSelector, shallowEqual, useDispatch } from "react-redux";
 import { Dispatch } from 'redux';
 
 interface IProps {
+	user: IUser;
 	task: ITask;
 	featureId: number;
 	changTaskFun(task: ITask, id: number): void;
+	delTaskFn(id: number): void;
+	statusTaskFn(featureId: number, taskId: number, status: string): void;
 }
 
-const Task: FunctionComponent<IProps> = ({task, featureId, changTaskFun}) => {
+const Task: FunctionComponent<IProps> = ({
+	                                         task,
+	                                         featureId,
+	                                         changTaskFun,
+	                                         delTaskFn,
+	                                         statusTaskFn,
+	                                         user
+										}) => {
 	
 	const [newText, setNewText] = React.useState<boolean>(false)
 	const [inpText, setInpText] = React.useState<string>(task.name)
@@ -25,8 +35,6 @@ const Task: FunctionComponent<IProps> = ({task, featureId, changTaskFun}) => {
 			if (!inpText) return false;
 			newTask.name = inpText;
 			rewriteTask(newTask);
-		} else {
-			console.log("jjjjjjjj",  );
 		}
 
 		setNewText(!newText)
@@ -34,6 +42,15 @@ const Task: FunctionComponent<IProps> = ({task, featureId, changTaskFun}) => {
 	
 	const getValue = (e: React.FormEvent<HTMLInputElement>) => {
 		setInpText(e.currentTarget.value);
+	}
+	
+	const delTask = () => {
+		delTaskFn(task.id);
+	}
+	
+	const statusTaskChFn = (e: React.FormEvent<HTMLSelectElement>) => {
+		const status = e.currentTarget.value;
+		statusTaskFn(featureId, task.id, status);
 	}
 	
 	return (
@@ -49,7 +66,20 @@ const Task: FunctionComponent<IProps> = ({task, featureId, changTaskFun}) => {
 					    placeholder="Text task"
 					/>}
 			</div>
-			<button onClick={rewright} className="btn btn-change">Change Task</button>
+			<select className="gl-select"
+			        onChange={statusTaskChFn} defaultValue={task.status}>
+				<option value='new'>New</option>
+				<option value='progress'>Progress</option>
+				<option value='testing'>Testing</option>
+				<option value='complete'>Complete</option>
+			</select>
+			{(user.position === 'manager' || user.position === 'tester') &&
+				<button onClick={rewright} className="btn btn-change btn-change_feature">Change Task</button>
+			}
+			{user.position === 'manager' &&
+				<button onClick={delTask} title="Remove Feature"
+			        className="btn btn-change btn-change_del"></button>
+			}
 		</div>
 	)
 }

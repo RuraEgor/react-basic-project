@@ -30,23 +30,7 @@ const reducer = (
 		case ActionType.CHECK_USER:
 			return {
 				...state,
-				// features: state.features.concat(action.feature)
 			}
-		// case actionTypes.CHANGE_TASK:
-		// 	// const updatedFeature: IFeature[] = state.features.map( el => {
-		// 	// 		if (!el.tasks.length) return el;
-		// 	// 		const tasks = el.tasks.map( item => {
-		// 	// 			if (item.id == action.task.id) return action.task;
-		// 	// 			return item;
-		// 	// 		})
-		// 	// 		el.tasks = tasks;
-		// 	// 		return el;
-		// 	// 	})
-		//
-		// 	return {
-		// 		...state,
-		// 		// features: [...updatedFeature]
-		// 	}
 	}
 	
 	return state

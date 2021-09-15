@@ -4,6 +4,7 @@ import reportWebVitals from './reportWebVitals';
 import { createStore, applyMiddleware, Store } from "redux"
 import { Provider } from "react-redux"
 import thunk from "redux-thunk"
+import { composeWithDevTools } from 'redux-devtools-extension'
 
 import App from './layouts/app';
 import reducer from "./store/reducer"
@@ -11,7 +12,7 @@ import './index.css';
 
 // const store: Store<ArticleState, ArticleAction> & { dispatch: DispatchType } = createStore(reducer, applyMiddleware(thunk))
 // const store: Store = createStore(reducer, applyMiddleware(thunk));
-const store: Store<any> = createStore(reducer, applyMiddleware(thunk));
+const store: Store<any> = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
 
 ReactDOM.render(
     <Provider store={store}>

@@ -138,12 +138,61 @@ button {
     background: #c3d0d5;
     padding: 20px;
     margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+.feature-item__cont-inp {
+    padding-right: 20px;
+    width: 100%;
+}
+.feature-item__cont-inp .task__input {
+    display: block;
+    width: 100%;
 }
 .feature-item__label {
     color: #3e3939;
     font-size: 22px;
     font-weight: bold;
     text-transform: uppercase;
+    padding-left: 20px;
+}
+.feature-item__cont {
+    display: flex;
+}
+.gl-select {
+    margin-right: 10px;
+    max-height: 30px;
+}
+.btn-change_feature {
+    margin-right: 10px;
+}
+.btn-change_del {
+    min-width: 30px;
+    position: relative;
+}
+.btn-change_del::before {
+    content: '';
+    display: block;
+    background-color: red;
+    position: absolute;
+    z-index: 1;
+    width: 20px;
+    height: 2px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+.btn-change_del::after {
+    content: '';
+    display: block;
+    background-color: red;
+    position: absolute;
+    z-index: 1;
+    width: 20px;
+    height: 2px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
 }
 .list-task {
     padding-left: 10%;
